@@ -32,7 +32,7 @@ const InnerWrapper = styled.div`
     flex &&
     css`
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
     `}
 `;
@@ -49,13 +49,7 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const {
-      id,
-      pageContext,
-      title,
-      body,
-      removeItem,
-    } = this.props;
+    const { id, pageContext, title, body, removeItem } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
@@ -63,14 +57,19 @@ class Card extends Component {
     }
 
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
+      <StyledWrapper>
         <InnerWrapper activeColor={pageContext}>
           <StyledHeading>{title}</StyledHeading>
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{body}</Paragraph>
+        </InnerWrapper>
+        <InnerWrapper flex>
           <Button onClick={() => removeItem(pageContext, id)} secondary>
-            REMOVE
+            Usuń
+          </Button>
+          <Button onClick={this.handleCardClick} secondary>
+            Czytaj
           </Button>
         </InnerWrapper>
       </StyledWrapper>
@@ -87,14 +86,13 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  pageContext: 'posts'
+  pageContext: 'posts',
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+  removeItem: (itemType, id) => {
+    dispatch(removeItemAction(itemType, id));
+  },
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withContext(Card));
+export default connect(null, mapDispatchToProps)(withContext(Card));
