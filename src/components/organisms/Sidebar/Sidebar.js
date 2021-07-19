@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
-import logoutIcon from 'assets/icons/logout.svg';
 import penIcon from 'assets/icons/pen.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import withContext from 'hoc/withContext';
@@ -34,10 +33,6 @@ const StyledLogoLink = styled(NavLink)`
   margin-bottom: 10vh;
 `;
 
-const StyledLogoutButton = styled(ButtonIcon)`
-  margin-top: auto;
-`;
-
 const StyledLinksList = styled.ul`
   margin: 0;
   padding: 0;
@@ -52,7 +47,6 @@ const Sidebar = ({ pageContext }) => (
         <ButtonIcon as={NavLink} to="/posts" icon={penIcon} activeclass="active" />
       </li>
     </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
   </StyledWrapper>
 );
 
